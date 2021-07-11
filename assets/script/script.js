@@ -1,39 +1,75 @@
 // Weather DashBoard Homework-6 By Tanvir Hossain
 
 
-var searchButton = $("#searchBtn");
+var cityList = [];;
 
 var apiKey = "59b8a8c405ff8423f99a6f8cdaf39e42";
 
-// Loop to keep saved cities in a list on HTML
+//Storing city list in local storage
 
-for (var i=0; i< localStorage.length; i++) {
+function storeCities() {
+    localStorage.setItem("cities", JSON.stringify(cityList));
+}
 
-    var city = localStorage.getItem(i);
+// Add latest search to the list
 
-    console.log(localStorage.getItem("city"));
+function createCityList(){
+    $(".list-cities").empty();
+    list-cities.forEach(function(city) {
+        $(".list-cities").prepend($(`<button class="list-group-item list-group-item-action cityButton" data-city="${city}">${city}</button>`));
+    })
+}
 
-    var cityName = $(".list-cities").addClass("list-group-item")
+// Loads city list and on click it calls api for that specific city
 
-    cityName.append("<li>" + city + "</li>");
+function init() {
+    var storedCities = JSON.parse(localStorage.getItem("cities"));
 
+    if (storedCities !== null) {
+        cityList = storedCities;
+    }
+
+    createCityList();
+
+    if (cityList) {
+        var thisCity = cityList[cityList.length - 1]
+        getCurrentWeather(thisCity, apiKey);
+        getForecast(thisCity, apiKey);
+    }
+}
+
+//Api call for current searched city and getting data for UV index
+
+function getCurrentWeather(thisCity, apiKey) {
+    var currentURL = `https://api.openweathermap.org/data/2.5/weather?q=${thisCity}&units=metric&appid=${apiKey}`;
+    var cityLat;
+    var cityLong;
+
+    $.ajax({
+        url: currentURL,
+        method: "GET"
+    }).then(function (data) {
+        $(".cityCurrent").append(
+            `<div class="row ml-1">
+                <h3 class="mr-3">${data.name} (${(new Date(1000 * data.dt).getUTCDate()) - 1}/${(new Date(1000 * data.dt).getUTCMonth()) + 1}/${new Date(1000 * data.dt).getUTCFullYear()})</h3>
+                <img src="http://openweathermap.org/img/w/${data.weather[0].icon}.png">
+            </div>`
+        )
+        $(".cityCurrent").append(`<p>Temperature: ${data.main.temp} &degC</p>`)
+        $(".cityCurrent").append(`<p>Humidity: ${data.main.humidity} %</p>`)
+        $(".cityCurrent").append(`<p>Wind: ${data.wind.speed} Kph</p>`)
+        cityLat = data.coord.lat;
+        cityLong = data.coord.lon;
+        getUVI(id, cityLat, cityLong);
+    })
 
 }
 
-// Key Count for local storage 
+// Button to clear the city list from local storage
 
-var keyCount = 0;
+var clear = document.querySelector("#clearCities");
 
-// On click event for search button
-
-searchButton.click(function () {
-
-    var searchInput = $("#searchInput").val();
-
-// Variables for current weather
-
-    var apiCurrent = "https://api.openweathermap.org/data/2.5/weather?q=" + searchInput + "&Appid=" + apiKey + "&units=metric";
-
-//Variables for 5 day forecast
-
-    var apiFiveDay = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchInput + "&Appid=" + apiKey + "&units=metric";
+clear.addEventListener("click", function () {
+    localStorage.clear();
+    location.reload();
+});

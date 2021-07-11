@@ -1,99 +1,54 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-   
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
-    
-    <title>Weather Dashboard</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Open Weather DashBoard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
-
+<!-- Project 6 By Tanvir Hossain -->
 <body>
-<!-- Weather DashBoard Homework-6 By Tanvir Hossain -->
-<!-- SCRIPTS WHICH NEED TO LOAD FIRST -->
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/d3bce829f3.js" crossorigin="anonymous"></script>
-
-
-<!-- HTML STARTS HERE -->
-
-<!-- Title BAR -->
-
-<div class="container-fluid">
-            <div class="card-body text-white text-center ">
-            <h1>Weather Dashboard</h1>
-        </div>
+    <div class="bg-dark">
+        <h1 class="text-center mb-2 p-2 text-light">Weather Dashboard</h1>
     </div>
-
- <!-- This is a container-->
- <div class="container-fluid px-1 px-sm-3 py-5 mx-auto">
-    <div class="row d-flex justify-content-center">
-        <div class="row card0">
-            <div class="card1 col-lg-8 col-md-7"> 
-                <div class="row px-3 mt-3 mb-3">
-                    <h1 class="large-font mr-3">26&#176;</h1>
-                    <div class="d-flex flex-column mr-3">
-                       
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <form>
+                    <div class="input-group m-2 pr-3">
+                        <input type="text" class="form-control" id="citySearchInput" placeholder="Search for a City">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit" id="citySearchButton"><i class="fas fa-search"></i></button>
+                        </div>
                     </div>
-                   
+                </form>
+                <div class="w-100">
+                    <ul class="list-group list-cities mx-2 mt-3"></ul>
+                </div>
+                <div>
+                    <button id="clearCities" type="button" class="btn btn-danger mx-2 mt-3">Clear Cities</button>
                 </div>
             </div>
-            <div class="card2 col-lg-4 col-md-5">
-                <div class="row px-3"> <input type="text" name="location" placeholder="Enter location" class="mb-5">
-                    <span class="input-group-btn">
-                        <button id= "searchBtn" class="btn btn-search fas fa-search fa-fw fa-xlg" aria-hidden="true" type="button"></button>
-                            
+            <div class="col-md-9">
+                <div class="card shadow m-2">
+                    <div class="card-body cityCurrent"></div>
                 </div>
-                <div class="mr-5">
-                    <ul class="list-cities light-text suggestion "> 
+                <div class="m-2">
+                    <h3>5 Day Forecast</h3>
+                    <div class="forecast row text-light">
 
-                    </ul>
-                    <p class="light-text">Cloudy</p>
-                    <p class="ml-auto">12%</p>
-                    
-                    <div class="line my-5"></div>
-                    <p>Weather Details</p>
-                    <div class="row px-3">
-                        <p class="light-text">Cloudy</p>
-                        <p class="ml-auto">12%</p>
                     </div>
-                    <div class="row px-3">
-                        <p class="light-text">Humidity</p>
-                        <p class="ml-auto">78%</p>
-                    </div>
-                    <div class="row px-3">
-                        <p class="light-text">Wind</p>
-                        <p class="ml-auto">1km/h</p>
-                    </div>
-                    <div class="row px-3">
-                        <p class="light-text">Rain</p>
-                        <p class="ml-auto">0mm</p>
-                    </div>
-                    <div class="line mt-3"></div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- local JS, Jquery scripts and moment JS -->
-<script src="./assets/script/script.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-
+    <script src="https://kit.fontawesome.com/5ae46afe61.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" 
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./assets/script.js"></script>
 </body>
+</html>

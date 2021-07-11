@@ -1,3 +1,5 @@
+/* Weather DashBoard Homework-6 By Tanvir Hossain */
+
 body {
     color: #fff;
     overflow-x: hidden;
@@ -86,6 +88,15 @@ input:focus {
 .suggestion:hover {
     color: #fff;
     cursor: pointer
+}
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 0rem 1rem !important;
+    margin-bottom: -1px;
+    background-color: #607d8b;
+    border: 0px !important;
+    
 }
 
 .line {
