@@ -74,7 +74,7 @@ function getUVI(apiKey, cityLat, cityLong) {
         url: uvURL,
         method: "GET"
     }).then(function (data) {
-        $(".cityCurrent").append(`<p>UV Index: <span class="badge badge-danger p-2">${data.value}</span></p>`);
+        $(".cityCurrent").append(`<p>UV Index: <span class="badge badge-warning p-2">${data.value}</span></p>`);
     })
 }
 
@@ -140,6 +140,8 @@ $("form").on("submit", function(event) {
 })
 
 // On click function to view results
+
+$("#citySearchButton").on("submit", displayCityWeather);
 
 $(".listCities").on("click", ".cityButton", displayCityWeather);
 
