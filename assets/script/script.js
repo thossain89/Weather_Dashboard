@@ -137,11 +137,12 @@ $("form").on("submit", function(event) {
     createCityList();
     storeCities();
     $("#citySearch").val("");
+    //displayCityWeather();
 })
 
-// On click function to view results
 
-$("#citySearchButton").on("submit", displayCityWeather);
+
+// On click function to view results
 
 $(".listCities").on("click", ".cityButton", displayCityWeather);
 
